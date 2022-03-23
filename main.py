@@ -4,15 +4,15 @@ from PIL import Image
 import os
 
 file = os.path.realpath(str(input("Enter image path: ")))
-final_file_path = os.path.realpath(str(input("Enter final file path: ")))
+output_file_path = os.path.realpath(str(input("Enter final file path: ")))
 
-if os.path.exists(final_file_path):
-    erase = str(input(f"Erase {os.path.normpath(final_file_path)} ? (Y/N): "))
+if os.path.exists(output_file_path):
+    erase = str(input(f"Erase {os.path.normpath(output_file_path)} ? (Y/N): "))
     erase_ = True if erase.upper() == "Y" else False
     while not erase_:
-        final_file_path = os.path.realpath(str(input("Enter new final file path: ")))
-        if os.path.exists(final_file_path):
-            erase = str(input(f"Erase {os.path.normpath(final_file_path)} ? (Y/N): "))
+        output_file_path = os.path.realpath(str(input("Enter new final file path: ")))
+        if os.path.exists(output_file_path):
+            erase = str(input(f"Erase {os.path.normpath(output_file_path)} ? (Y/N): "))
             erase_ = True if erase.upper() == "Y" else False
         else:
             erase_ = True  # the file does not exist ;)
@@ -25,7 +25,7 @@ with Image.open(file) as image:
     # y  y'
     # y' = 100y//x
     image = image.resize((100, (100 * image.height // image.width)))
-    with open(final_file_path, "w", encoding="UTF-8") as final_file:
+    with open(output_file_path, "w", encoding="UTF-8") as output_file:
         for y in range(image.height):
             line = ''
             for x in range(image.width):
@@ -40,6 +40,6 @@ with Image.open(file) as image:
                 idx = grey * 9 // 255
                 # then we add it to our line
                 line += ascii_char[idx] + " "  # we add 1 space : a char is more height than wide
-            final_file.write(line + '\n')
+            output_file.write(line + '\n')
             print(line)
-    final_file.close()
+    output_file.close()
