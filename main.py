@@ -25,7 +25,7 @@ with Image.open(file) as image:
     # y  y'
     # y' = 100y//x
     image = image.resize((100, (100 * image.height // image.width)))
-    with open(output_file_path, "w", encoding="UTF-8") as output_file:
+    with open(output_file_path, "w+", encoding="UTF-8") as output_file:
         for y in range(image.height):
             line = ''
             for x in range(image.width):
